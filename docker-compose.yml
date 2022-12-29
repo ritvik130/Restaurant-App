@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: backend
+    container_name: express-server
+    command: npm start
+    restart: always
+    ports:
+      - "5000:5000"
+    #depends_on:
+      #- redis
+    env_file: ./server/.env
+    #links:
+      #- redis
+    #environment:
+      #- NODE_ENV=development
+      #- CHOKIDAR_USEPOLLING=true
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: client
+    container_name: react-client
+    command: npm start
+    #stdin_open: true
+    #tty: true
+    #environment:
+      #- CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+    restart: always
+    links:
+      - backend
+    ports:
+      - "3000:3000"
