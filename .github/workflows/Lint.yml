@@ -10,5 +10,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: lts/*
+      - run: cd server
+      - run: npm install
+      - run: npm run lint
+      - run: cd client
       - run: npm install
       - run: npm run lint
