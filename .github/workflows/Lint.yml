@@ -11,8 +11,8 @@ jobs:
         with:
           node-version: lts/*
       - run: cd server
-      - run: npm install
+      - run: npm i
       - run: npm run lint
       - run: cd ../client
-      - run: npm install
+      - run: npm i
       - run: npm run lint
